@@ -1,7 +1,9 @@
 import { useForm } from 'react-hook-form';
+import { useRouter } from 'next/router'; // 1. Add this line
 
 export default function AddSchool() {
   const { register, handleSubmit, formState: { errors } } = useForm();
+  const router = useRouter(); // 2. Initialize the router
 
   const onSubmit = async (data) => {
     try {
@@ -14,7 +16,9 @@ export default function AddSchool() {
       });
 
       if (response.ok) {
-        alert('School added successfully!');
+        // 3. Remove the alert and redirect
+        console.log('School added successfully! Redirecting...');
+        router.push('/showSchools'); // This line performs the automatic redirect
       } else {
         alert('Failed to add school.');
       }
@@ -85,5 +89,3 @@ export default function AddSchool() {
     </div>
   );
 }
-
-
